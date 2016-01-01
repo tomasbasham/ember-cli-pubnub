@@ -16,6 +16,12 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    pubnub: {
+      subscribe_key: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      publish_key: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      ssl: true
     }
   };
 
