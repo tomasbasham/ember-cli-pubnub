@@ -28,8 +28,8 @@ Before the `pubnub` service can be used it first must be configured through `con
 module.exports = function(environment) {
   var ENV = {
     pubnub: {
-      subscribe_key: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-      publish_key: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      subscribe_key: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      publish_key: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
       ssl: true
     }
   };
