@@ -169,4 +169,4 @@ This sets up a callback using the channel's `on` method by passing to it a prese
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
