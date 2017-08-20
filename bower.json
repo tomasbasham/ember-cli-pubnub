@@ -1,8 +1,5 @@
 {
   "name": "ember-cli-pubnub",
-  "dependencies": {
-    "sinonjs": "^1.17.1"
-  },
   "devDependencies": {
     "pubnub": "~3.7.15"
   }
