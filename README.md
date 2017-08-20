@@ -1,6 +1,6 @@
 # Ember-cli-pubnub [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-pubnub.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-pubnub)
 
-An [Ember CLI](http://www.ember-cli.com/) addon to integrate the PubNub low-latency, realtime messaging platform.
+An [Ember CLI](https://ember-cli.com/) addon to integrate the PubNub low-latency, realtime messaging platform.
 
 PubNub utilises a publish/subscribe model functioning within a quarter of a second to give the user a sense of immediate or current updates to application data making it ideal for chat or any other application requiring transient data.
 
@@ -150,18 +150,19 @@ This sets up a callback using the channel's `on` method by passing to it a prese
 
 ### Installation
 
-* `git clone` this repository
+* `git clone <repository-url>` this repository
+* `cd ember-cli-pubnub`
 * `npm install`
 * `bower install`
 
 ### Running
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Running Tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
@@ -169,4 +170,4 @@ This sets up a callback using the channel's `on` method by passing to it a prese
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
