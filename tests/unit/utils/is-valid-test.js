@@ -1,4 +1,4 @@
-import isValid from '../../../utils/is-valid';
+import isValid from 'dummy/utils/is-valid';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | is valid');

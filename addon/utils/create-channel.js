@@ -1,9 +1,6 @@
-import Ember from 'ember';
-import Channel from 'ember-cli-pubnub/channels/channel';
+import { assert } from '@ember/debug';
 
-const {
-  assert
-} = Ember;
+import Channel from 'ember-cli-pubnub/channels/channel';
 
 /*
  * Create a channel object with a

@@ -12,8 +12,9 @@
  */
 export default function isValid(value) {
   const valueType = typeof value;
+  const validTypes = ['object', 'string', 'number', 'boolean'];
 
-  if (valueType === 'object' || valueType === 'string' || valueType === 'number' || valueType === 'boolean') {
+  if (validTypes.includes(valueType)) {
     return true;
   }
 

@@ -1,6 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
-import Pubnub from '../../../services/pubnub';
 import Sinon from 'sinon';
+
+import Pubnub from 'dummy/services/pubnub';
+
+import { moduleFor, test } from 'ember-qunit';
 
 let sandbox, pubnub;
 

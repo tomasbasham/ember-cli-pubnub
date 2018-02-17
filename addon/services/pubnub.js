@@ -1,18 +1,18 @@
 /* global PUBNUB */
 
-import Ember from 'ember';
+import EmberError from '@ember/error';
+import Evented from '@ember/object/evented';
+import Service from '@ember/service';
+
+import { A } from '@ember/array';
+import { assert } from '@ember/debug';
+import { get, getWithDefault, set } from '@ember/object';
+import { on } from '@ember/object/evented';
+
 import isValid from 'ember-cli-pubnub/utils/is-valid';
 import createChannel from 'ember-cli-pubnub/utils/create-channel';
 
-const {
-  assert,
-  get,
-  getWithDefault,
-  on,
-  set
-} = Ember;
-
-export default Ember.Service.extend(Ember.Evented, {
+export default Service.extend(Evented, {
 
   /*
    * The pubnub client API context.
@@ -55,7 +55,7 @@ export default Ember.Service.extend(Ember.Evented, {
     const pubnubConfig = get(this, 'config')['pubnub'];
 
     if (!pubnubConfig) {
-      Ember.Error('no configuration provided!');
+      EmberError('no configuration provided!');
     }
 
     const pubnub = PUBNUB.init(pubnubConfig);
@@ -444,7 +444,7 @@ export default Ember.Service.extend(Ember.Evented, {
    *   List of users.
    */
   listPresence(channel) {
-    return getWithDefault(this, `_presence.${channel}`, Ember.A());
+    return getWithDefault(this, `_presence.${channel}`, A());
   },
 
   /*
@@ -460,7 +460,7 @@ export default Ember.Service.extend(Ember.Evented, {
    *   Presence data for a channel.
    */
   presenceData(channel) {
-    return getWithDefault(this, `_presData.${channel}`, Ember.A());
+    return getWithDefault(this, `_presData.${channel}`, A());
   },
 
   /*

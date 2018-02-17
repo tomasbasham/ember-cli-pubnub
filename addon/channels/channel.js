@@ -1,10 +1,8 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
-const {
-  get
-} = Ember;
+import { get } from '@ember/object';
 
-export default Ember.Object.extend({
+export default EmberObject.extend({
 
   /*
    * Name given to this channel. This will

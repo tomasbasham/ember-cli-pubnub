@@ -1,11 +1,7 @@
-import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
 import Sinon from 'sinon';
 
-const {
-  get,
-  set
-} = Ember;
+import { get, set } from '@ember/object';
+import { moduleFor, test } from 'ember-qunit';
 
 const {
   match
