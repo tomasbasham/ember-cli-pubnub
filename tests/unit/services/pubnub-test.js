@@ -44,7 +44,7 @@ test('#audit calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'audit', function() {
+  const stub = sandbox.stub(pubnub, 'audit').callsFake(function() {
     return true;
   });
 
@@ -58,7 +58,7 @@ test('#grant calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'grant', function() {
+  const stub = sandbox.stub(pubnub, 'grant').callsFake(function() {
     return true;
   });
 
@@ -74,7 +74,7 @@ test('#hereNow calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'here_now', function() {
+  const stub = sandbox.stub(pubnub, 'here_now').callsFake(function() {
     return true;
   });
 
@@ -92,7 +92,7 @@ test('#history calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'history', function() {
+  const stub = sandbox.stub(pubnub, 'history').callsFake(function() {
     return true;
   });
 
@@ -108,7 +108,7 @@ test('#publish calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'publish', function() {
+  const stub = sandbox.stub(pubnub, 'publish').callsFake(function() {
     return true;
   });
 
@@ -122,7 +122,7 @@ test('#revoke calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'grant', function() {
+  const stub = sandbox.stub(pubnub, 'grant').callsFake(function() {
     return true;
   });
 
@@ -136,7 +136,7 @@ test('#setAuthKey calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'auth', function() {
+  const stub = sandbox.stub(pubnub, 'auth').callsFake(function() {
     return true;
   });
 
@@ -148,7 +148,7 @@ test('#setState calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'state', function() {
+  const stub = sandbox.stub(pubnub, 'state').callsFake(function() {
     return true;
   });
 
@@ -162,7 +162,7 @@ test('#setUuid calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'set_uuid', function() {
+  const stub = sandbox.stub(pubnub, 'set_uuid').callsFake(function() {
     return true;
   });
 
@@ -174,7 +174,7 @@ test('#state calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'state', function() {
+  const stub = sandbox.stub(pubnub, 'state').callsFake(function() {
     return true;
   });
 
@@ -190,7 +190,7 @@ test('#subscribe calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'subscribe', function() {
+  const stub = sandbox.stub(pubnub, 'subscribe').callsFake(function() {
     return true;
   });
 
@@ -206,7 +206,7 @@ test('#subscribe does not resubscribe to a channel', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'subscribe', function() {
+  const stub = sandbox.stub(pubnub, 'subscribe').callsFake(function() {
     return true;
   });
 
@@ -220,7 +220,7 @@ test('#subscribe caches subscribed channels', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  sandbox.stub(pubnub, 'subscribe', function() {
+  sandbox.stub(pubnub, 'subscribe').callsFake(function() {
     return true;
   });
 
@@ -232,7 +232,7 @@ test('#subscribe caches presence data for a channel', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  sandbox.stub(pubnub, 'subscribe', function() {
+  sandbox.stub(pubnub, 'subscribe').callsFake(function() {
     return true;
   });
 
@@ -244,7 +244,7 @@ test('#time calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'time', function() {
+  const stub = sandbox.stub(pubnub, 'time').callsFake(function() {
     return true;
   });
 
@@ -258,7 +258,7 @@ test('#unsubscribe calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'unsubscribe', function() {
+  const stub = sandbox.stub(pubnub, 'unsubscribe').callsFake(function() {
     return true;
   });
 
@@ -297,7 +297,7 @@ test('#uuid calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'uuid', function() {
+  const stub = sandbox.stub(pubnub, 'uuid').callsFake(function() {
     return true;
   });
 
@@ -311,7 +311,7 @@ test('#whereNow calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'where_now', function() {
+  const stub = sandbox.stub(pubnub, 'where_now').callsFake(function() {
     return true;
   });
 
@@ -325,7 +325,7 @@ test('#me calls pubnub with the correct arguments', function(assert) {
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'get_uuid', function() {
+  const stub = sandbox.stub(pubnub, 'get_uuid').callsFake(function() {
     return true;
   });
 
@@ -368,7 +368,7 @@ test('#messageEventHandler triggers an event for each returned message', functio
   let service = this.subject();
 
   const pubnub = get(service, 'pubnub');
-  const stub = sandbox.stub(pubnub, 'each', function(messages, callback) {
+  const stub = sandbox.stub(pubnub, 'each').callsFake(function(messages, callback) {
     messages.forEach(callback);
   });
 

@@ -25,7 +25,7 @@ test('it can be configured with a name', function(assert) {
 test('#audit calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'audit', function() {
+  const stub = sandbox.stub(pubnub, 'audit').callsFake(function() {
     return true;
   });
 
@@ -38,7 +38,7 @@ test('#audit calls pubnub with the correct arguments', function(assert) {
 test('#grant calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'grant', function() {
+  const stub = sandbox.stub(pubnub, 'grant').callsFake(function() {
     return true;
   });
 
@@ -53,11 +53,11 @@ test('#hereNow calls pubnub with the correct arguments', function(assert) {
 
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const hereNowStub = sandbox.stub(pubnub, 'hereNow', function() {
+  const hereNowStub = sandbox.stub(pubnub, 'hereNow').callsFake(function() {
     return true;
   });
 
-  const listPresenceStub = sandbox.stub(pubnub, 'listPresence', function() {
+  const listPresenceStub = sandbox.stub(pubnub, 'listPresence').callsFake(function() {
     return false;
   });
 
@@ -77,7 +77,7 @@ test('#hereNow lists subscribed users for this channel', function(assert) {
 test('#history calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'history', function() {
+  const stub = sandbox.stub(pubnub, 'history').callsFake(function() {
     return true;
   });
 
@@ -90,12 +90,12 @@ test('#on calls pubnub with the correct arguments', function(assert) {
 
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'on', function() {
+  const stub = sandbox.stub(pubnub, 'on').callsFake(function() {
     return true;
   });
 
   const callbackStub = sandbox.stub();
-  const eventStub = sandbox.stub(pubnub, 'messageEventString', function(channel) {
+  const eventStub = sandbox.stub(pubnub, 'messageEventString').callsFake(function(channel) {
     return `pn-message:${channel}`;
   });
 
@@ -108,7 +108,7 @@ test('#on calls pubnub with the correct arguments', function(assert) {
 test('#publish calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'publish', function() {
+  const stub = sandbox.stub(pubnub, 'publish').callsFake(function() {
     return true;
   });
 
@@ -121,7 +121,7 @@ test('#publish calls pubnub with the correct arguments', function(assert) {
 test('#revoke calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'revoke', function() {
+  const stub = sandbox.stub(pubnub, 'revoke').callsFake(function() {
     return true;
   });
 
@@ -134,7 +134,7 @@ test('#revoke calls pubnub with the correct arguments', function(assert) {
 test('#setState calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'setState', function() {
+  const stub = sandbox.stub(pubnub, 'setState').callsFake(function() {
     return true;
   });
 
@@ -147,7 +147,7 @@ test('#setState calls pubnub with the correct arguments', function(assert) {
 test('#state calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'state', function() {
+  const stub = sandbox.stub(pubnub, 'state').callsFake(function() {
     return true;
   });
 
@@ -160,7 +160,7 @@ test('#state calls pubnub with the correct arguments', function(assert) {
 test('#unsubscribe calls pubnub with the correct arguments', function(assert) {
   let model = this.subject({ name: 'enterprise', pubnub });
 
-  const stub = sandbox.stub(pubnub, 'unsubscribe', function() {
+  const stub = sandbox.stub(pubnub, 'unsubscribe').callsFake(function() {
     return true;
   });
 
