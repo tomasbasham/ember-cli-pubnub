@@ -1,6 +1,0 @@
-{
-  "name": "ember-cli-pubnub",
-  "devDependencies": {
-    "pubnub": "^3.16.5"
-  }
-}

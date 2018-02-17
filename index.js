@@ -1,24 +1,31 @@
 'use strict';
 
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const mergeTrees = require('broccoli-merge-trees');
+
 module.exports = {
   name: 'ember-cli-pubnub',
 
-  /*
-   * Add the pubnub javascript package
-   * to the consuming application for
-   * convenience. Now the developer
-   * can use pubnub without importing
-   * it themselves.
-   *
-   * @method included
-   *
-   * @param {Object} app
-   *   An EmberApp instance.
-   */
   included: function(app) {
-    this.app = app;
+    this._super(app);
 
-    // Add the pubnub package to the consuming application.
-    app.import('bower_components/pubnub/web/pubnub.js');
+    const vendor = this.treePaths.vendor;
+
+    app.import(`${vendor}/pubnub.js`);
+    app.import(`${vendor}/shims/pubnub.js`, {
+      exports: {
+        PubNub: ['default']
+      }
+    });
+  },
+
+  treeForVendor: function(vendorTree) {
+    const modulePath = path.dirname(require.resolve('pubnub/dist/web/pubnub.js'));
+    const pubnubTree = new Funnel(modulePath, {
+      files: ['pubnub.js']
+    });
+
+    return mergeTrees([vendorTree, pubnubTree]);
   }
 };

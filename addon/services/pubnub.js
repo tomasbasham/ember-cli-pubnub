@@ -1,8 +1,7 @@
-/* global PUBNUB */
-
 import EmberError from '@ember/error';
 import Evented from '@ember/object/evented';
 import Service from '@ember/service';
+import PubNub from 'pubnub';
 
 import { A } from '@ember/array';
 import { assert } from '@ember/debug';
@@ -58,10 +57,10 @@ export default Service.extend(Evented, {
       EmberError('no configuration provided!');
     }
 
-    const pubnub = PUBNUB.init(pubnubConfig);
+    const pubnub = new PubNub(pubnubConfig);
 
     // Initiate state values.
-    set(this, '_channels', []);
+    set(this, '_channels', A());
     set(this, '_presence', {});
     set(this, '_presData', {});
 
