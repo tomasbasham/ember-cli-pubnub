@@ -21,10 +21,9 @@ ember install ember-cli-pubnub
 
 ## Usage
 
-This addon implements all of the functions listed under the [JavaScript API
-reference for realtime
-apps](https://www.pubnub.com/docs/web-javascript/api-reference) as part of the
-`pubnub` service.
+This addon implements a shim for the PubNub V4 JavaScript library that can be
+imported as an es6 module. The library is initialised with a `pubnub` service
+that should be used to make requests to the PubNub backend.
 
 ### Configuration
 
@@ -39,8 +38,8 @@ publish API keys.
 module.exports = function(environment) {
   var ENV = {
     pubnub: {
-      subscribe_key: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-      publish_key: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      subscribeKey: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      publishKey: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
       ssl: true
     }
   };
@@ -83,10 +82,11 @@ include the service on a per object basis.
 
 ```JavaScript
 // app/controllers/application.js
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject } from '@ember/service';
 
-export default Ember.Controller.extend({
-  pubnub: Ember.inject.service()
+export default Controller.extend({
+  pubnub: inject()
 });
 ```
 
@@ -96,97 +96,130 @@ objects that need access to the service.
 
 ### Subscribe
 
-In order to receive messages you must first subscribe to a channel. Only a
-channel name is required to subscribe to a channel and must be unique. Other
-optional parameters can be passed into the subscribe function as key/value
-pairs and are defined within the API reference on the PubNub website.
+In order to receive messages published to a channel use the `subscribe`
+function passing the required unique channel name. Other optional parameters
+can be passed into the subscribe function as key/value pairs and are defined
+within the API reference on the PubNub website.
 
 ##### Subscribe Example
 
 ```JavaScript
 // app/controllers/application.js
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  joinChannel: Ember.on('init', function() {
-    const pubnub = this.get('pubnub');
-    const channel = pubnub.subscribe('lobby');
-  })
-});
-```
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { inject } from '@ember/service';
 
-This will subscribe to the `lobby` channel and return a channel object that
-will be the interface to this channel.
+export default Controller.extend({
+  pubnub: inject(),
 
-### Channel
+  joinChannel: on('init', function() {
+    const pubnub = get(this, 'pubnub');
 
-A channel object is a proxy, passing the channel name to each of the
-implemented functions that interact with the PubNub service. To be able to
-react to an incoming message you must provide a callback function that will be
-passed any message that is received on the channel from any connected peer.
-
-##### Message Event Example
-
-```JavaScript
-// app/controllers/application.js
-import Ember from 'ember';
-
-export default Ember.Controller.extend({
-  joinChannel: Ember.on('init', function() {
-    const pubnub = this.get('pubnub');
-    const channel = pubnub.subscribe('lobby');
-
-    channel.on(pubnub.messageEventString, function(payload) {
-      console.log(payload.message);
-    });
-
-    channel.publish({ message: 'hello, world!' });
-  })
-});
-```
-
-This sets up a callback using the channel's `on` method by passing to it a
-message event string. Typically the event string will be of type string (i.e.
-`pn-message:lobby`) however if a function is passed instead (i.e.
-`pubnub.messageEventString`) it will be called passing to it the channel name.
-This gives you the opportunity to dynamically create event strings. In the
-above example the event string function in fact simply returns
-`pn-message:lobby`.
-
-Further to this you are able to publish to the channel using the `publish`
-function. You may pass to this any valid JSON object including objects, arrays,
-strings, numbers and booleans.
-
-### Presence
-
-You may also supply a callback that is invoked on updates to a channel's
-listeners.
-
-##### Presence Event Example
-
-```JavaScript
-// app/controllers/application.js
-import Ember from 'ember';
-
-export default Ember.Controller.extend({
-  joinChannel: Ember.on('init', function() {
-    const pubnub = this.get('pubnub');
-    const channel = pubnub.subscribe('lobby');
-
-    channel.on(pubnub.presenceEventString, function(payload) {
-      console.log(payload.event);
+    pubnub.subscribe({
+      channels: ['lobby'],
+      withPresence: true
     });
   })
 });
 ```
 
-This sets up a callback using the channel's `on` method by passing to it a
-presence event string. Typically the event string will be of type string (i.e.
-`pn-presence:lobby`) however if a function is passed instead (i.e.
-`pubnub.presenceEventString`) it will be called passing to it the channel name.
-This gives you the opportunity to dynamically create event strings. In the
-above example the event string function in fact simply returns
-`pn-presence:lobby`.
+This will subscribe the client  to the `lobby` channel and additionally
+subscribe to the presence channel instance conventionally named `lobby-pnpres`.
+
+### Publish
+
+In order to publish messages to a channel that a client has previously
+subscribed use the `publish` function passing both the required channel name
+and message. Other optional parameters can be passed into the `publish`
+function as key/value pairs and are defined within the API reference on the
+PubNub website.
+
+##### Publish Example
+
+```JavaScript
+// app/controllers/application.js
+import Controller from '@ember/controller';
+
+import { get } from '@ember/object';
+import { inject } from '@ember/service';
+
+export default Controller.extend({
+  pubnub: inject(),
+
+  actions: {
+    publish(message) {
+      const pubnub = get(this, 'pubnub');
+
+      pubnub.publish({
+        channel: 'lobby',
+        message: 'Hello, World'
+      });
+    }
+  }
+});
+```
+
+This will publish the message `Hello, World` to the `lobby` channel. All client
+that have subscribed to this channel will receive this message.
+
+### Advanced Setup
+
+Previous examples demonstrate how to subscribe to a channel and subsequently
+publish a message to the same channel. However there is no guarantee that a
+client will only publish messages after it has successfully subscribed to a
+channel. Therefore a client may not receive all of it's own messages.
+
+To ensure the client only publishes messages after it has subscribed to a
+channel use the `addListener` function. This allows callbacks for channel
+status changes that receives events when a client has subscribed to a channel.
+
+##### Advanced Example
+
+```JavaScript
+// app/controllers/application.js
+import Controller from '@ember/controller';
+
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { inject } from '@ember/service';
+
+export default Controller.extend({
+  pubnub: inject(),
+
+  joinChannel: on('init', function() {
+    const pubnub = get(this, 'pubnub');
+    const channel = 'lobby';
+
+    pubnub.addListener({
+      status: function(status) {
+        const message = 'Hello, World';
+
+        if (status.category === 'PNConnectedCategory') {
+          pubnub.publish({ channel, message }, function(status) {
+            // handle publish status.
+          });
+        }
+      }, message: function(message) {
+        // handle message.
+      }, presence: function(event) {
+        // handle presence.
+      }
+    });
+
+    pubnub.subscribe({
+      channels: [channel],
+      withPresence: true
+    });
+  })
+});
+```
+
+By following this pattern on a client that both subscribes and publishes to a
+channel a client will be able to receive it own published messages. It also
+sets up a callback to receive message from other clients on the channel and
+presence events.
 
 ## Development
 

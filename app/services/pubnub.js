@@ -1,6 +1,6 @@
-import Pubnub from 'ember-cli-pubnub/services/pubnub';
+import PubNub from 'ember-cli-pubnub/services/pubnub';
 import config from '../config/environment';
 
-export default Pubnub.extend({
-  config: config
+export default Object.assign({}, PubNub, {
+  config
 });
