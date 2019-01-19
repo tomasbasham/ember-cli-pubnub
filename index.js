@@ -5,7 +5,7 @@ const Funnel = require('broccoli-funnel');
 const mergeTrees = require('broccoli-merge-trees');
 
 module.exports = {
-  name: 'ember-cli-pubnub',
+  name: require('./package').name,
 
   /**
    * Add the PubNub JavaScript package

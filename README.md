@@ -12,6 +12,11 @@ This addon allows ember to establish and maintain persistent web socket
 connections to the [PubNub](https://www.pubnub.com/) service and synchronises
 messages being sent to and from remote peers.
 
+## Compatibility
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
 ## Installation
 
 From within your Ember CLI project directory run:
@@ -221,30 +226,6 @@ channel a client will be able to receive it own published messages. It also
 sets up a callback to receive message from other clients on the channel and
 presence events.
 
-## Development
+## License
 
-### Installation
-
-* `git clone <repository-url>` this repository
-* `cd ember-cli-pubnub`
-* `npm install`
-* `bower install`
-
-### Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember
-  versions)
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build`
-
-For more information on using ember-cli, visit
-[https://ember-cli.com/](https://ember-cli.com/).
+This project is licensed under the [MIT License](LICENSE.md).
