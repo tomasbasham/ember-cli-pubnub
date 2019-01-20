@@ -1,4 +1,4 @@
-# ember-cli-pubnub [![Build Status](https://travis-ci.com/tomasbasham/ember-cli-pubnub.svg?branch=master)](https://travis-ci.com/tomasbasham/ember-cli-pubnub)
+# ember-cli-pubnub [![Build Status](https://travis-ci.com/tomasbasham/ember-cli-pubnub.svg?branch=master)](https://travis-ci.com/tomasbasham/ember-cli-pubnub) [![Maintainability](https://api.codeclimate.com/v1/badges/ab32267129e27c3b95d2/maintainability)](https://codeclimate.com/github/tomasbasham/ember-cli-pubnub/maintainability)
 
 An [Ember CLI](https://ember-cli.com/) addon to integrate the PubNub
 low-latency, realtime messaging platform.
