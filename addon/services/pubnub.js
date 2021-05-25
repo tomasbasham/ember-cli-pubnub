@@ -2,8 +2,6 @@ import EmberError from '@ember/error';
 import PubNub from 'pubnub';
 import { get } from '@ember/object';
 
-import { getWithDefault } from '@ember/object';
-
 export default {
   create() {
     const config = get(this, 'config') ?? {};
