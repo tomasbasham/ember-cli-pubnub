@@ -1,6 +1,6 @@
 import EmberError from '@ember/error';
 import PubNub from 'pubnub';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 
 import { getWithDefault } from '@ember/object';
 
