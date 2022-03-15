@@ -1,11 +1,10 @@
 import EmberError from '@ember/error';
 import PubNub from 'pubnub';
-
-import { getWithDefault } from '@ember/object';
+import { get } from '@ember/object';
 
 export default {
   create() {
-    const config = getWithDefault(this, 'config', {});
+    const config = get(this, 'config') ?? {};
 
     if (!config || typeof config.pubnub !== 'object') {
       throw new EmberError('Please set the `pubnub` property in the envrionment config');
