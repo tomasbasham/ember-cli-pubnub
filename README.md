@@ -45,6 +45,7 @@ module.exports = function(environment) {
     pubnub: {
       subscribeKey: 'sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
       publishKey: 'pub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+      uuid: 'YOUR-UUID-HERE',
       ssl: true
     }
   };
